@@ -29,11 +29,13 @@ const orderContronller = require('../controller/order/orderContronller')
 const allOrder = require('../controller/order/allOrder')
 const updateOrder = require('../controller/order/updateOrder')
 const verifyEmailUser = require('../controller/user/verifyEmailUser')
+const userForgotController = require('../controller/user/userForgotPassword')
 
 //user
 router.post("/signup", userSignUpController)
 router.post("/signin", userSignInController)
 router.post("/verify-email", verifyEmailUser)
+router.post("/forgot-password", userForgotController)
 router.get("/user-detail", authToken, userDetailController)
 router.get("/logout", userLogOut)
 

@@ -3,13 +3,14 @@ const userModel = require("../../models/userModel")
 async function removeUser(req, res) {
     try {
 
-        const { userId } = req.body
+        const userId = req.body._id
+        console.log("_id", req.body._id)
 
-        const removeUser = await userModel.findByIdAndDelete(userId)
+        const removeUser = await userModel.deleteOne({ _id: userId })
 
         res.json({
             data: removeUser,
-            message: "User Delete Successfully!!!",
+            message: "User Remove Successfully!!!",
             error: false,
             success: true
         })

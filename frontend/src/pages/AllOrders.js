@@ -15,16 +15,6 @@ const Order = () => {
         orderStatus: "",
         _id: "",
     })
-    const [data, setData] = useState([])
-
-    const extractedData = allOrders.map(data => ({
-        email: data.email || "",
-        address: data.address || "",
-        phone: data.phone || "",
-        orderStatus: data.orderStatus || "",
-        _id: data._id || "",
-    }));
-
 
     const fetchOrderDetails = async () => {
         const response = await fetch(SummaryApi.allOrder.url, {
@@ -72,7 +62,7 @@ const Order = () => {
                                         item.productDetails.map((product, index2) => {
                                             return (
                                                 <div key={product.productId + index2} className='flex flex-row gap-5 items-center bg-slate-300 p-3'>
-                                                    <img src={product.image[0]}
+                                                    <img src={product.image[0]} alt='loading'
                                                         className='w-32 h-32 p-1 bg-white '
                                                     />
                                                     <div className='mb-5 w-1/4'>
@@ -89,7 +79,10 @@ const Order = () => {
                                                         </div>
                                                         <div className='flex-row flex'>
                                                             <p>Payment Status:</p>
-                                                            <p className='px-2 text-green-600 capitalize'>{item.paymentDetails.payment_status}</p>
+                                                            {
+                                                                item.paymentDetails.payment_status === "refund" ? (<p className='capitalize text-red-700' > {item.paymentDetails.payment_status}</p>)
+                                                                    : ((<p className='px-2 text-green-600 capitalize'>{item.paymentDetails.payment_status}</p>))
+                                                            }
                                                         </div>
 
                                                     </div>
@@ -107,9 +100,8 @@ const Order = () => {
                                                                         <div className='flex-row flex'>
                                                                             <p>Status: </p>
                                                                             {
-                                                                                item.orderStatus == "cancelled" ? (<p className='capitalize text-red-700' >{item.orderStatus}</p>)
+                                                                                item.orderStatus === "cancelled" ? (<p className='capitalize text-red-700' > {item.orderStatus}</p>)
                                                                                     : ((<p className='capitalize text-green-700' >{item.orderStatus}</p>))
-
                                                                             }
                                                                         </div>
 

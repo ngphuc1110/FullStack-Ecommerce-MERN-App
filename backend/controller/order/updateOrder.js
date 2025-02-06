@@ -8,6 +8,14 @@ const updateOrder = async (req, res) => {
             ...(phone && { phone: phone }),
             ...(orderStatus && { orderStatus: orderStatus }),
         }
+
+        if (orderStatus === "cancelled") {
+            payload["paymentDetails.payment_status"] = "refund";
+        }
+        else {
+            payload["paymentDetails.payment_status"] = "paid";
+        }
+
         const updateOrder = await orderProductModel.findByIdAndUpdate(orderId, payload)
 
         res.json({

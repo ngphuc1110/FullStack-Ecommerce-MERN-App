@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import SummaryApi from '../common'
 import VerticalProductSearch from '../components/VerticalProductSearch'
 
 
 const SearchProduct = () => {
+    const navigate = useNavigate()
     const query = useLocation()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
     console.log("query:", query?.search)
+    if (!query?.search) {
+        navigate("/")
+    }
 
     const fetchProduct = async () => {
         setLoading(true)
@@ -24,7 +28,7 @@ const SearchProduct = () => {
         fetchProduct()
     }, [query])
     return (
-        <div className='container mx-auto p-4'>
+        <div className='mx-auto container p-4 min-h-[583px]'>
             {
                 loading && (
                     <p className='text-center text-lg '>Loading ...</p>

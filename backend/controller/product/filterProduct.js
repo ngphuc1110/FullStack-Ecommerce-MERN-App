@@ -2,7 +2,6 @@ const productModel = require("../../models/productModel")
 
 const filterProductController = async (req, res) => {
     try {
-
         const brandNameList = req?.body?.brandName || []
         const chipSetList = req?.body?.chipSet || []
         const GPUList = req?.body?.gpu || []
@@ -12,6 +11,8 @@ const filterProductController = async (req, res) => {
         const osList = req?.body?.os || []
         const weightList = req?.body?.weight || []
         const batteryList = req?.body?.battery || []
+        const minPrice = req.body.priceMin || ""
+        const maxPrice = req.body.priceMax || ""
 
         const query = {};
         if (brandNameList.length > 0) {
@@ -41,16 +42,16 @@ const filterProductController = async (req, res) => {
         if (batteryList.length > 0) {
             query.battery = { $in: batteryList };
         }
-
-        // let products;
-
-        // if (Object.keys(query).length > 0) {
-        //     products = await productModel.find(query);
-        // } else {
-        //     products = [];
-        // }
-
+        if (minPrice && maxPrice) {
+            query.sellingPrice = { $gte: minPrice, $lte: maxPrice };
+        } else if (minPrice) {
+            query.sellingPrice = { $gte: minPrice };
+        } else if (maxPrice) {
+            query.sellingPrice = { $lte: maxPrice };
+        }
         products = await productModel.find(query);
+
+        console.log("products", products)
 
         res.json({
             data: products,

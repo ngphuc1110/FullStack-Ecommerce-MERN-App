@@ -28,9 +28,6 @@ const BrandProduct = () => {
         urlCategoryListObject[el] = true
     })
 
-
-
-
     const [selectBrand, setSelectBrand] = useState(urlCategoryListObject)
     const [selectChipSet, setSelectChipSet] = useState({})
     const [selectGPU, setselectGPU] = useState({})
@@ -50,6 +47,21 @@ const BrandProduct = () => {
     const [filterOsList, setFilterOsList] = useState([])
     const [filterWeightList, setFilterWeightList] = useState([])
     const [filterBatteryList, setFilterBatteryList] = useState([])
+    const [priceData, setPriceData] = useState({
+        min: "",
+        max: "",
+    })
+
+    const handleOnChange = (e) => {
+        const { name, value } = e.target
+
+        setPriceData((preve) => {
+            return {
+                ...preve,
+                [name]: value
+            }
+        })
+    }
 
     const [sortBy, setSortBy] = useState("")
     const [recommend, SetRecommend] = useState("")
@@ -71,11 +83,15 @@ const BrandProduct = () => {
                 screen: filterScreenList,
                 os: filterOsList,
                 weight: filterWeightList,
-                battery: filterBatteryList
+                battery: filterBatteryList,
+                priceMin: priceData.min,
+                priceMax: priceData.max,
+
             })
         })
 
         const dataResponse = await response.json()
+        console.log("dataResponse", dataResponse)
 
         const productsWithScores = dataResponse?.data.map((product) => {
             const score = ProductScorer(product);
@@ -196,7 +212,7 @@ const BrandProduct = () => {
             SetRecommend("");
         }, 100);
         return () => clearTimeout(timeout);
-    }, [filterCategoryList, filterChipSetList, filterGPUList, filterRamList, filterStorageList, filterScreenList, filterOsList, filterWeightList, filterBatteryList]);
+    }, [filterCategoryList, filterChipSetList, filterGPUList, filterRamList, filterStorageList, filterScreenList, filterOsList, filterWeightList, filterBatteryList, priceData]);
 
 
     useEffect(() => {
@@ -331,6 +347,14 @@ const BrandProduct = () => {
         setselectOs("");
         setselectWeight("");
         setselectBattery("");
+        setPriceData((preve) => {
+            return {
+                ...preve,
+                min: "",
+                max: "",
+            }
+        })
+
     }
 
     useEffect(() => {
@@ -360,8 +384,38 @@ const BrandProduct = () => {
                     {/* Filter By */}
                     <div className=' '>
                         <h3 className='text-lg uppercase font-medium text-slate-500 border-b bp-2 border-slate-500 '>Category</h3>
-                        <div className=''>
 
+                        <div className='mt-3'>
+                            <h4 className='text-sm uppercase font-sm text-slate-500'>Price</h4>
+                            <form className='text-sm grid-flow-row gap-2 py-2 w-fit'>
+                                <div>
+                                    <label>Min</label>
+                                    <div className='bg-slate-100 p-2'>
+                                        <input type="text"
+
+                                            name='min'
+                                            value={priceData.min}
+                                            placeholder='Input Min Price'
+                                            onChange={handleOnChange}
+                                            className='w-full h-full outline-none bg-transparent' />
+                                    </div>
+                                </div>
+                                <div >
+                                    <label>Max</label>
+                                    <div className='bg-slate-100 p-2'>
+                                        <input type="text"
+
+                                            name='max'
+                                            value={priceData.max}
+                                            placeholder='Input Max Price'
+                                            onChange={handleOnChange}
+                                            className='w-full h-full outline-none bg-transparent' />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div className=''>
                             <h4 className='text-sm uppercase font-sm text-slate-500'>Brand</h4>
                             <form className='text-sm grid-flow-row gap-2 py-2 w-fit'>
                                 {
@@ -530,8 +584,8 @@ const BrandProduct = () => {
                     <div className='flex justify-between'>
                         <p className='font-medium text-slate-400 text-lg my-2 '>Search Results: {data.length}</p>
                         <div className=''>
-                            <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700' onClick={() => handleOnClickRecommend('dsc')}>Recommend</button>
-                            {/* <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700' onClick={() => handleOnClick()}>Clear</button> */}
+                            <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700 mx-3' onClick={() => handleOnClickRecommend('dsc')}>Recommend</button>
+                            <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700' onClick={() => handleOnClick()}>Clear</button>
                         </div>
                     </div>
                     <div className='min-h-[calc(100vh-120px)] overflow-y-scroll max-h-[calc(100vh-120px)] my-2'>

@@ -39,10 +39,30 @@ const AllUsers = () => {
         console.log("dataResponse", dataResponse)
     }
 
+    const removeUser = async (id) => {
+        const response = await fetch(SummaryApi.remove_user.url, {
+            method: SummaryApi.remove_user.method,
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                _id: id,
+            })
+        })
+
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            fetchAllUsers()
+        }
+    }
+
 
     useEffect(() => {
         fetchAllUsers()
     }, [])
+
     return (
         <div>
             <table className='w-full userTable'>
@@ -55,7 +75,7 @@ const AllUsers = () => {
                         <th>Role</th>
                         <th>Created Date</th>
                         <th>Edit</th>
-                        {/* <th>Delete</th> */}
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,12 +90,19 @@ const AllUsers = () => {
                                     <td>{el?.role}</td>
                                     <td>{moment(el?.createdAt).format('LL')}</td>
                                     <td>
-                                        <button className='bg-green-200 rounded-full p-2 cursor-pointer hover:bg-green-500 hover:text-white'
+                                        <button className='bg-green-300 rounded-full p-2 cursor-pointer hover:bg-green-700 hover:text-white'
                                             onClick={() => {
                                                 setUpdateUserDetails(el)
                                                 setOpenUpdateRole(true)
                                             }}>
                                             <MdModeEdit />
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button className='bg-red-300 rounded-full p-2 cursor-pointer hover:bg-red-700 hover:text-white'
+                                            onClick={() => removeUser(el._id)}
+                                        >
+                                            <FaTrash />
                                         </button>
                                     </td>
                                 </tr>

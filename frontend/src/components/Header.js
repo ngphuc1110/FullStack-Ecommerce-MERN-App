@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import Context from '../context';
+import ChangeUserRole from './ChangeUserRole';
 
 const Header = () => {
 
@@ -22,6 +23,13 @@ const Header = () => {
     const URLSearch = new URLSearchParams(searchInput?.search)
     const searchQuery = URLSearch.getAll("q")
     const [search, setSearch] = useState(searchQuery)
+    // const [updateUserDetails, setUpdateUserDetails] = useState({
+    //     email: "",
+    //     name: "",
+    //     address: "",
+    //     role: "",
+    //     _id: "",
+    // })
 
     const handleLogout = async () => {
         const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -60,9 +68,9 @@ const Header = () => {
                 </div>
                 <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2 '>
                     <input type='text' placeholder='Search products here ...' className='w-full outline-none' onChange={handleSearch} value={search} />
-                    <div className='text-lg min-w-[50px] h-8 bg-red-500 flex items-center justify-center rounded-r-full text-white cursor-pointer hover:bg-red-700'>
+                    <Link to={"category-product"} className='text-lg min-w-[50px] h-8 bg-red-500 flex items-center justify-center rounded-r-full text-white cursor-pointer hover:bg-red-700'>
                         <IoSearch />
-                    </div>
+                    </Link>
                 </div>
                 <div className='flex items-center gap-5'>
 
@@ -87,7 +95,17 @@ const Header = () => {
                                         {
                                             user?.role !== ROLE.GENERAL && (<Link to={"admin-panel/all-products"} className='whitespace-nowrap hover:bg-slate-200 p-2' onClick={() => setMenuDisplay(preve => !preve)}> Admin Panel</Link>)
                                         }
-                                        <Link to={"/order"} className='whitespace-nowrap hover:bg-slate-200 p-2' onClick={() => setMenuDisplay(preve => !preve)}>Order</Link>
+                                        <Link to={"/order"} className='whitespace-nowrap hover:bg-slate-200 p-2' onClick={() => setMenuDisplay(preve => !preve)}>Order</Link>\
+                                        {/* <ChangeUserRole
+                                            onClose={() => setOpenUpdateRole(false)}
+                                            name={updateUserDetails.name}
+                                            email={updateUserDetails.email}
+                                            address={updateUserDetails.address}
+                                            role={updateUserDetails.role}
+                                            userId={updateUserDetails._id}
+
+                                        /> */}
+
                                     </div>
 
                                 </nav>

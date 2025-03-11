@@ -51,8 +51,6 @@ const filterProductController = async (req, res) => {
         }
         products = await productModel.find(query);
 
-        console.log("products", products)
-
         res.json({
             data: products,
             message: "products",

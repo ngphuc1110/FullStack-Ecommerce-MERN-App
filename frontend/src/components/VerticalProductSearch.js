@@ -15,7 +15,7 @@ const VerticalProductSearch = ({ loading, data = [] }) => {
     }
 
     return (
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(270px,330px))] justify-between md:gap-6 overflow-x-scroll scrollbar-none transition-all' >
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(270px,330px))] justify-center md:gap-6 overflow-x-scroll scrollbar-none transition-all' >
             {
                 loading ? (
                     loadingList.map((product, index) => {
@@ -42,7 +42,7 @@ const VerticalProductSearch = ({ loading, data = [] }) => {
                     data.map((product, index) => {
                         return (
                             <div className='w-full min-w-[320px] md:min-w-[330px] max-w-[320px] md:max-w-[350px] bg-white rounded-sm shadow ' onClick={scrollTop}>
-                                <Link to={"/product/" + product?._id} className='bg-slate-200 h-60 p-4 min-w-[120px] md:min-w-[145px] flex justify-center items-center'>
+                                <Link to={"/product/" + product?._id} className='bg-slate-200 h-60 p-4 min-w-[120px] md:min-w-[145px] flex justify-center items-center gap-4'>
                                     <img src={product.productImage[0]} className='object-scale-down h-full mix-blend-multiply hover:scale-105 transition-all' />
                                 </Link>
                                 <div className='p-4 grid gap-3'>

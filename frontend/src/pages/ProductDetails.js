@@ -70,7 +70,6 @@ const ProductDetails = () => {
         setZoomImage(true)
         const { left, top, width, height } = e.target.getBoundingClientRect()
         console.log("coordinate", left, top, width, height)
-
         const x = (e.clientX - left) / width
         const y = (e.clientY - top) / height
 
@@ -111,8 +110,7 @@ const ProductDetails = () => {
                                         style={{
                                             background: `url(${activeImage})`,
                                             backgroundRepeat: 'no-repeat',
-                                            backgroundPosition: `${zoomImageCoordinate.x * 100}% ${zoomImageCoordinate.y * 100}% `
-
+                                            backgroundPosition: `${zoomImageCoordinate.x * 50}% ${zoomImageCoordinate.y * 50}% `
                                         }}
                                     >
 
@@ -271,7 +269,7 @@ const ProductDetails = () => {
                 Description: {data.description}
             </div>
             {
-                data.brandName && (<OtherProductDisplay heading="Similar Products" productId={params?.id} />)
+                data.brandName && (<OtherProductDisplay heading="Recommend Products" productId={params?.id} />)
             }
 
 

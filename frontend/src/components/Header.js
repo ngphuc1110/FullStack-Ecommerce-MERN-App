@@ -95,7 +95,7 @@ const Header = () => {
                                         {
                                             user?.role !== ROLE.GENERAL && (<Link to={"admin-panel/all-products"} className='whitespace-nowrap hover:bg-slate-200 p-2' onClick={() => setMenuDisplay(preve => !preve)}> Admin Panel</Link>)
                                         }
-                                        <Link to={"/order"} className='whitespace-nowrap hover:bg-slate-200 p-2' onClick={() => setMenuDisplay(preve => !preve)}>Order</Link>\
+                                        <Link to={"/order"} className='whitespace-nowrap hover:bg-slate-200 p-2' onClick={() => setMenuDisplay(preve => !preve)}>Order</Link>
                                         {/* <ChangeUserRole
                                             onClose={() => setOpenUpdateRole(false)}
                                             name={updateUserDetails.name}

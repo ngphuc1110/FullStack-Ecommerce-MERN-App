@@ -584,7 +584,7 @@ const BrandProduct = () => {
                     <div className='flex justify-between'>
                         <p className='font-medium text-slate-400 text-lg my-2 '>Search Results: {data.length}</p>
                         <div className=''>
-                            <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700 mx-3' onClick={() => handleOnClickRecommend('dsc')}>Recommend</button>
+                            <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700 mx-3' onClick={() => handleOnClickRecommend('dsc')}>Recommendation</button>
                             <button className='rounded-full bg-red-500 p-2 px-3 text-white hover:bg-red-700' onClick={() => handleOnClick()}>Clear</button>
                         </div>
                     </div>

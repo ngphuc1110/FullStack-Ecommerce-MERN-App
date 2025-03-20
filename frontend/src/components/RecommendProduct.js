@@ -17,7 +17,7 @@ const RecommendProduct = ({ loading, data = [], bestProductId }) => {
     }
 
     return (
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(270px,330px))] justify-between md:gap-6 overflow-x-scroll scrollbar-none transition-all' >
+        <div className='grid grid-cols-[repeat(auto-fit,minmax(270px,330px))] justify-center md:gap-6 overflow-x-scroll scrollbar-none transition-all' >
             {
                 loading ? (
                     loadingList.map((product, index) => {
@@ -52,7 +52,7 @@ const RecommendProduct = ({ loading, data = [], bestProductId }) => {
                             >
                                 <Link
                                     to={"/product/" + product?._id}
-                                    className="bg-slate-200 h-60 p-4 min-w-[120px] md:min-w-[145px] flex justify-center items-center"
+                                    className="bg-slate-200 h-60 p-4 min-w-[120px] md:min-w-[145px] flex justify-center items-center "
                                 >
                                     <img
                                         src={product.productImage[0]}

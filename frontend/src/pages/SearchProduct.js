@@ -12,7 +12,7 @@ const SearchProduct = () => {
 
     console.log("query:", query?.search)
     if (!query?.search) {
-        navigate("/")
+        navigate("/category-product")
     }
 
     const fetchProduct = async () => {

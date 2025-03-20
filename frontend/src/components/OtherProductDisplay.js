@@ -90,7 +90,7 @@ const OtherProductDisplay = ({ heading, productId }) => {
     return (
         <div className='container mx-auto px-6 my-4 relative'>
             <h2 className='text-2xl font-semibold py-2 '>{heading}</h2>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(270px,330px))] justify-between md:gap-6 overflow-x-scroll scrollbar-none transition-all' >
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(270px,330px))] justify-center md:gap-6 overflow-x-scroll scrollbar-none transition-all gap-4' >
 
 
                 {

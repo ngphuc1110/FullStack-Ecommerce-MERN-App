@@ -6,7 +6,6 @@ const searchProduct = async (req, res) => {
 
         const regex = new RegExp(query, `i`)
         // i: Case insensitive
-        // g: Find all results in string
         const product = await productModel.find({
             "$or": [
                 {
